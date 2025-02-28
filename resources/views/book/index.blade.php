@@ -10,7 +10,17 @@
 <body>
     <div class="container">
 
-        <div class="">
+        
+    </div>
+    
+</body>
+</html>
+
+@extends('layouts.app')
+
+@section('content')
+<div class="container">
+<div class="">
             <table class="table table-striped table-hover">
             <tr>
                 <th>#</th>
@@ -45,7 +55,5 @@
         {{ $books->links() }}
 
         </div>
-    </div>
-    
-</body>
-</html>
+</div>
+@endsection
