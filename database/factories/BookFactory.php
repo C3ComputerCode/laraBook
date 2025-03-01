@@ -20,7 +20,7 @@ class BookFactory extends Factory
         return [
             'book_id' => $this->faker->sentence,
             'name' =>$this->faker->name,
-            'auther' =>$this->faker->name,
+            'author' =>$this->faker->name,
             'total_copies' =>rand(1,5),
             'available_copies'=>0,            
             'book_category_id'=>rand(1,5),
