@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BookCategoryController;
 use App\Http\Controllers\BookController;
 use Illuminate\Support\Facades\Route;
 
@@ -19,6 +20,8 @@ Route::get('/', function () {
 });
 
 Route::resource('books',BookController::class);
+Route::resource('bookcategories',BookCategoryController::class);
+
 
 Auth::routes();
 

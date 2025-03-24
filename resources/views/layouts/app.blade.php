@@ -85,8 +85,10 @@
                             <a href='{{route("books.index")}}' class="text-decoration-none ">Book List</a>
                         </li>
                         <li class="list-group-item"><a href='{{route("books.create")}}' class="text-decoration-none ">Book Add</a></li>
-                        <li class="list-group-item">A fourth item</li>
-                        <li class="list-group-item">And a fifth one</li>
+                        <li class="list-group-item"><a href='{{route("bookcategories.index")}}' class="text-decoration-none ">Book Category</a></li>
+                        <li class="list-group-item"> <a href='{{route("bookcategories.create")}}' class="text-decoration-none ">
+                        Book Category Add 
+                        </a></li>
                     </ul>
                 </div>
                 <div class="col-lg-9">
