@@ -1,0 +1,159 @@
+Xampp Install
+This PC > Properties > Enviroment Variables > Path  > Edit > New
+
+C:\xampp\php\
+C:\xampp\mysql\bin\
+
+cmd > php -v
+cmd > mysql -u root 
+
+https://laravel.com/docs/10.x/deployment#server-requirements
+
+Composer Install > composer -v
+Node Install > 	node -v 
+		npm - v
+
+git Install > git -v
+
+PHP 
+cd C:\xampp\htdocs\php\ 
+code .
+
+localhost\php\
+
+
+
+
+1. Class Name တွေအတွက် CapitalCase ကိုသုံးရပါတ
+2. Method Name တွေProperty Name တွေအတွက် camelCase ကိုသုံးရ
+3. Variable တွေDatabase, Table, Column Name တွေအတွက် snake_case သုံ
+
+
+php artisan key:generate
+php artisan serve
+php artisan make:controller ArticleController
+php artisan make:model Category -mc
+
+php artisan migrate
+php artisan migrate:rollback
+
+{{$loop->iteration}}  - loop in number serial 
+
+UI
+composer require laravel/ui
+php artisan ui bootstrap --auth
+npm install
+npm run dev
+
+date
+$article->created_at->diffForHumans()
+
+
+for Pagination
+Controller 	$data = Article::latest()->paginate(3);
+View  		{{ $articles->links() }}
+ apps/Providers  >	AppServiceProvider.php 
+
+use Illuminate\Pagination\Paginator;
+
+Paginator::useBootstrap();
+
+Create
+Web.php > 
+Route::get('/articles/add',[ArticleController::class,"add"]);
+Route::post('/articles/add',[ArticleController::class,"create"]);
+Route::get('/articles/delete/{id}',[ArticleController::class,"delete"]);
+
+
+
+View>articles>create.blade.php
+Controller > ArticleController > create
+
+php artisan make:model Comment -mcr
+web.php >
+Route::resource('/articles/detail/comments', CommentController::class);
+View > Article > detail > 
+
+
+use Illuminate\Support\Facades\Auth;
+
+php artisan list
+php artisan route:list
+
+
+
+Authorization
+ArticleController >
+public function __construct()
+    {
+        return $this->middleware("auth")->except(['index','detail']);
+    }
+
+web.php > ->middleware('auth');
+view - 	@auth  
+ 	@endauth
+
+Articlecontroller,Categorycontroller,CommentController
+user_id ထည့်မယ် , 
+save,update -	$comment->user_id = auth()->user()->id;
+
+ArticleFactory >   'user_id'=>rand(1,4)
+DatabaseSeeder-> user ထည့်
+php artisan migrate:fresh --seed
+
+
+App>Providers > AuthServicesProvider> 
+
+Gate::define('update-comment', function (User $user, Comment  $comment) {
+            return $user->id === $comment->user_id;
+        });
+
+Comment Controller 
+if (! Gate::allows('update-comment', $comment)) {
+            abort(403,$message = "Unauthorize..");
+        }
+
+
+
+https://github.com/C3ComputerCode/laravel_10         
+
+https://marketplace.visualstudio.com/items?itemName=bmewburn.vscode-intelephense-client
+
+https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode
+
+VSCODE Error -
+Error whiel fetching extensions failed to fetch
+advanced.name/freeproxy
+ctrl+shift+p >setting.json
+	{
+    "http.proxy": "http://58.59.61.200:10991",
+    "http.proxyStrictSSL": false
+}
+
+Factory - 'book_id' => $this->faker->sentence,
+
+Laravel UI
+composer require laravel/ui
+php artisan ui bootstrap --auth
+npm install
+npm run dev
+
+ npm audit fix --force
+
+Resource 
+php artisan make:model BookCategory -a
+Resource Route
+Web.php
+Route::resource('bookcategories',BookCategoryController::class);
+Migration - string('name')
+
+
+
+ArticleFactory >               'name' =>$this->faker->name,
+DatabaseSeeder-> \App\Models\BookCategory::factory(5)->create();
+php artisan migrate:fresh --seed
+
+
+
+
+
