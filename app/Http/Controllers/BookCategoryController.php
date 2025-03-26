@@ -30,7 +30,12 @@ class BookCategoryController extends Controller
      */
     public function store(StoreBookCategoryRequest $request)
     {
-        //
+       
+        $bookCategory = new BookCategory;
+        
+        $bookCategory->name = $request->name;
+        $bookCategory->save();
+        return redirect()->route('bookcategories.index');
     }
 
     /**
@@ -44,24 +49,34 @@ class BookCategoryController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(BookCategory $bookCategory)
+    public function edit(BookCategory $bookCategory,$id)
     {
-        //
+        $bookCategory = BookCategory::find($id);
+        return view("bookcategory.edit",compact("bookCategory"));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateBookCategoryRequest $request, BookCategory $bookCategory)
+    public function update(UpdateBookCategoryRequest $request, BookCategory $bookCategory, $id)
     {
-        //
+        $bookCategory = BookCategory::find($id);
+        
+        $bookCategory->name = $request->name;
+        $bookCategory->update();
+        return redirect()->route("bookcategories.index")->with("info","Book Category Updated is successfully");
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(BookCategory $bookCategory)
+    public function destroy(BookCategory $bookCategory,$id)
     {
-        //
+       
+        // $id = $bookCategory->id;
+        
+        $bookCategory = BookCategory::find($id);
+        $bookCategory->delete();
+        return back()->with('info',"Category is Deleted...");
     }
 }
