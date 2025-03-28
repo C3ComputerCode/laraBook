@@ -21,8 +21,13 @@ Route::get('/', function () {
 
 Route::resource('books',BookController::class);
 Route::resource('bookcategories',BookCategoryController::class);
+// Route::get('books', [App\Http\Controllers\BookController::class, 'search'])->name('books.search');
+
 
 
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+
+

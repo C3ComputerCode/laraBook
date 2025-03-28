@@ -11,10 +11,25 @@ class BookController extends Controller
     /**
      * Display a listing of the resource.
      */
+    // public function search(Request $request){
+    //     $search = $request->input('search');
+    //     return $search;
+    // }
+
+
     public function index()
     {
         // $books = Book::all();
+        // $books = Book::when(isset(request()->search),function($query){
+        //     // $search = $request->search;
+        //     $search = $request->input('search');
+        //     $query = Book::where('name', 'like', "%$search%")
+        //     // return $search;
+        // })->latest()->paginate(5);
+
         $books = Book::latest()->paginate(5);
+
+
         // return $books;
         return view('book.index',compact('books'));
     }
@@ -57,7 +72,9 @@ class BookController extends Controller
      */
     public function edit(Book $book)
     {
-        //
+        $id = $book->id;
+        $book = Book::findOrFail($id);
+        return view('book.edit',compact('book'));
     }
 
     /**
@@ -65,7 +82,18 @@ class BookController extends Controller
      */
     public function update(UpdateBookRequest $request, Book $book)
     {
-        //
+        $id = $book->id;
+        $book = Book::findOrFail($id);
+
+        $book->book_id =  $request->book_id;
+        $book->name = $request->name;
+        $book->author= $request->author;
+        $book->total_copies= $request->total_copies;
+        $book->book_category_id= $request->book_category_id;
+        $book->publication_date= $request->publication_date;
+
+        $book->update();
+        return redirect()->route('books.index')->with('info','Book is Updated');
     }
 
     /**
@@ -73,6 +101,9 @@ class BookController extends Controller
      */
     public function destroy(Book $book)
     {
-        //
+        $id = $book->id;
+        $book = Book::findOrFail($id);
+        $book->delete();
+        return back()->with("info","Book is Deleted.");
     }
 }

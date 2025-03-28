@@ -30,9 +30,9 @@ class BookCategoryController extends Controller
      */
     public function store(StoreBookCategoryRequest $request)
     {
-       
+
         $bookCategory = new BookCategory;
-        
+
         $bookCategory->name = $request->name;
         $bookCategory->save();
         return redirect()->route('bookcategories.index');
@@ -61,7 +61,7 @@ class BookCategoryController extends Controller
     public function update(UpdateBookCategoryRequest $request, BookCategory $bookCategory, $id)
     {
         $bookCategory = BookCategory::find($id);
-        
+
         $bookCategory->name = $request->name;
         $bookCategory->update();
         return redirect()->route("bookcategories.index")->with("info","Book Category Updated is successfully");
@@ -72,9 +72,9 @@ class BookCategoryController extends Controller
      */
     public function destroy(BookCategory $bookCategory,$id)
     {
-       
+        // return $bookCategory;
         // $id = $bookCategory->id;
-        
+
         $bookCategory = BookCategory::find($id);
         $bookCategory->delete();
         return back()->with('info',"Category is Deleted...");

@@ -5,9 +5,9 @@
 <div class="">
             <table class="table table-striped table-hover">
             <tr>
-                <th>#</th>                
-                <th>Name</th>                                
-                <th>Control</th>       
+                <th>#</th>
+                <th>Name</th>
+                <th>Control</th>
             </tr>
 
             @foreach($bookCategories as $bookCategory)
@@ -26,7 +26,7 @@
                     <a href="{{route('bookcategories.edit',$bookCategory->id)}}" class="btn btn-warning">edit</a>
                    </div>
                 </td>
-            </tr>            
+            </tr>
             @endforeach
 
             </table>
@@ -34,9 +34,9 @@
             @session('info')
                 <div class="alert alert-danger" role="alert">
                     {{ $value }}
-                </div>                   
+                </div>
             @endsession
-        
+
 
         </div>
 </div>
