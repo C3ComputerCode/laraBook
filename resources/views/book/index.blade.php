@@ -8,7 +8,7 @@
                 <form action='' method="GET">
 
                     <div class="d-flex gap-2">
-                        <input type="text" class="form-control" name="search">
+                        <input type="text" class="form-control" name="search" value="{{ request('search') }}">
                         <input type="submit" class="btn btn-primary">
                     </div>
                 </form>
@@ -57,6 +57,9 @@
                 @endforeach
 
             </table>
+            @if($books->isEmpty())
+            <p>No results found for "<span class="text-danger">{{ request('search') }}</span>". Try another keyword.</p>
+            @endif
             {{ $books->links() }}
             @session('info')
                 <div class="alert alert-danger" role="alert">

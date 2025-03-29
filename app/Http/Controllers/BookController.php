@@ -19,18 +19,26 @@ class BookController extends Controller
 
     public function index()
     {
-        // $books = Book::all();
+        if(isset(request()->search)){
+            $search = request()->search;
+            // dd($search);
+            $books = Book::where('name', 'like', "%$search%")
+            ->orWhere('author','like',"%$search%")
+            ->latest()->paginate(5)->appends(['search' => $search]);
+        }else{
+            $books = Book::latest()->paginate(5);
+
+        }
+
+
         // $books = Book::when(isset(request()->search),function($query){
-        //     // $search = $request->search;
-        //     $search = $request->input('search');
-        //     $query = Book::where('name', 'like', "%$search%")
-        //     // return $search;
+        //     $search = request()->search;
+        //     // dd($search);
+        //     $query->where('name', "LIKE", "%$search%")->orWhere('author',"LIKE","%$search");
         // })->latest()->paginate(5);
 
-        $books = Book::latest()->paginate(5);
+        // $books = Book::latest()->paginate(5);
 
-
-        // return $books;
         return view('book.index',compact('books'));
     }
 
