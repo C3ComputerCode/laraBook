@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Book;
+use App\Models\Photo;
 use App\Http\Requests\StoreBookRequest;
 use App\Http\Requests\UpdateBookRequest;
 
@@ -56,6 +57,27 @@ class BookController extends Controller
     public function store(StoreBookRequest $request)
     {
         $book = new Book;
+        $photo= new Photo;
+
+
+        if ($request->hasFile('photo')) {
+
+            $fileName = uniqid()."_photo.".$request->file('photo')->extension();
+            $filepath = $request->file('photo')->storeAs("uploads", $fileName,"public");
+            dd($filepath);
+            $photo->photo->$fileName;
+            $photo->save();
+
+        }
+
+        return $request->all();
+
+        // $request->validate([
+        //     'photo' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+        // ]);
+
+
+
         $book->book_id =  $request->book_id;
         $book->name = $request->name;
         $book->author= $request->author;
@@ -64,6 +86,7 @@ class BookController extends Controller
         $book->publication_date= $request->publication_date;
 
         $book->save();
+
         return redirect()->route('books.index');
     }
 

@@ -1,8 +1,13 @@
 @extends('layouts.app')
 
 @section('content')
-    <form action='{{route("books.store")}}' method="POST">
+    <form action='{{route("books.store")}}' method="POST" enctype="multipart/form-data">
         @csrf
+
+        <div class="mb-3">
+            <input type="file" name="photo" accept="image/png, image/jpeg" class="form-control"   >
+        </div>
+
         <div class="mb-3">
             <label for="bookid" class="form-label">Book ID</label>
             <input type="text" class="form-control" id="bookid" name="book_id">
