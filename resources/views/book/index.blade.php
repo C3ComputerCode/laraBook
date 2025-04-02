@@ -20,6 +20,7 @@
                     <th>#</th>
                     <!-- <th>BookID</th> -->
                     <th>Name</th>
+                    <th>Photo</th>
                     <th>Author</th>
                     <!-- <th>Total_Copy</th> -->
                     <!-- <th>Avriable </th> -->
@@ -34,10 +35,22 @@
                         <td>{{ $book->id }}</td>
                         <!-- <td>{{ $book->book_id }}</td> -->
                         <td>{{ $book->name }}</td>
+                        <td>
+                            @foreach ($book->photos as $photo)
+
+                            <img src="{{asset('/storage/uploads/'.$photo->photo)}}" alt=""  height="50" >
+
+                            @endforeach
+                        </td>
                         <td>{{ $book->author }}</td>
                         <!-- <td>{{ $book->total_copies }}</td> -->
                         <!-- <td>{{ $book->available_copies }}</td> -->
-                        <td>{{ $book->book_category_id }}</td>
+                        <td>
+
+                            {{$book->bookCategory['name'] ?? " "}}
+
+
+                        </td>
                         <!-- <td>{{ $book->publication_date }}</td> -->
                         <!-- <td></td> -->
                         <td>

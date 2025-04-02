@@ -20,6 +20,8 @@ class BookController extends Controller
 
     public function index()
     {
+        $photos = Photo::all();
+
         if(isset(request()->search)){
             $search = request()->search;
             // dd($search);
@@ -40,7 +42,7 @@ class BookController extends Controller
 
         // $books = Book::latest()->paginate(5);
 
-        return view('book.index',compact('books'));
+        return view('book.index',compact('books','photos'));
     }
 
     /**
@@ -57,20 +59,13 @@ class BookController extends Controller
     public function store(StoreBookRequest $request)
     {
         $book = new Book;
-        $photo= new Photo;
+        $photo= new Photo();
 
 
-        if ($request->hasFile('photo')) {
 
-            $fileName = uniqid()."_photo.".$request->file('photo')->extension();
-            $filepath = $request->file('photo')->storeAs("uploads", $fileName,"public");
-            dd($filepath);
-            $photo->photo->$fileName;
-            $photo->save();
 
-        }
 
-        return $request->all();
+        // return $request->all();
 
         // $request->validate([
         //     'photo' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
@@ -86,6 +81,17 @@ class BookController extends Controller
         $book->publication_date= $request->publication_date;
 
         $book->save();
+
+        if ($request->hasFile('photo')) {
+
+            $fileName = time()."-".uniqid()."_photo.".$request->file('photo')->extension();
+            $filepath = $request->file('photo')->storeAs("uploads", $fileName,"public");
+
+            $photo->photo = $fileName;
+            $photo->book_id= $book->id;
+            $photo->save();
+
+        }
 
         return redirect()->route('books.index');
     }
