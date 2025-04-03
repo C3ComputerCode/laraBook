@@ -50,6 +50,7 @@
                             {{$book->bookCategory['name'] ?? " "}}
 
 
+
                         </td>
                         <!-- <td>{{ $book->publication_date }}</td> -->
                         <!-- <td></td> -->

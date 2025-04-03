@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Book;
 use App\Models\Photo;
+use App\Models\BookCategory;
 use App\Http\Requests\StoreBookRequest;
 use App\Http\Requests\UpdateBookRequest;
 
@@ -17,10 +18,15 @@ class BookController extends Controller
     //     return $search;
     // }
 
+    public function customer(){
+        $books = Book::all();
+        return view('welcome',compact('books'));
+    }
+
 
     public function index()
     {
-        $photos = Photo::all();
+
 
         if(isset(request()->search)){
             $search = request()->search;
@@ -42,7 +48,7 @@ class BookController extends Controller
 
         // $books = Book::latest()->paginate(5);
 
-        return view('book.index',compact('books','photos'));
+        return view('book.index',compact('books'));
     }
 
     /**
@@ -50,7 +56,8 @@ class BookController extends Controller
      */
     public function create()
     {
-        return view('book.create');
+        $bookCategories = BookCategory::all();
+        return view('book.create',compact('bookCategories'));
     }
 
     /**

@@ -15,12 +15,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
+Route::prefix('admin')->group(function () {
+    Route::resource('books',BookController::class);
+    Route::resource('bookcategories',BookCategoryController::class);
+
 });
 
-Route::resource('books',BookController::class);
-Route::resource('bookcategories',BookCategoryController::class);
+
 // Route::get('books', [App\Http\Controllers\BookController::class, 'search'])->name('books.search');
 
 
@@ -28,6 +33,8 @@ Route::resource('bookcategories',BookCategoryController::class);
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/', [App\Http\Controllers\BookController::class, 'customer'])->name('customer.home');
+
 
 
 

@@ -28,9 +28,25 @@
             <input type="text" class="form-control" id="total_copies" name="total_copies">
         </div>
 
+        {{-- {{$bookCategories = \App\Models\BookCategory::all() }} --}}
+
+
         <div class="mb-3">
             <label for="book_category_id" class="form-label">book_category_id</label>
-            <input type="text" class="form-control" id="book_category_id" name="book_category_id">
+
+            <select id="book_category_id" name="book_category_id" class="form-control">
+                <option value=""> Choose the Category </option>
+
+
+                @foreach ($bookCategories as $bookCategory )
+
+                    <option value="{{$bookCategory->id}}"> {{$bookCategory->name}} </option>
+
+                @endforeach
+
+
+            </select>
+
         </div>
 
         <div class="mb-3">

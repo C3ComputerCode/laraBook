@@ -77,24 +77,7 @@
 
 
         <div class="container-fluid">
-            <div class="row py-4">
-                <div class="col-lg-3">
-                    <ul class="list-group">
-                        <li class="list-group-item active" aria-current="true">Dashboared</li>
-                        <li class="list-group-item">
-                            <a href='{{route("books.index")}}' class="text-decoration-none ">Book List</a>
-                        </li>
-                        <li class="list-group-item"><a href='{{route("books.create")}}' class="text-decoration-none ">Book Add</a></li>
-                        <li class="list-group-item"><a href='{{route("bookcategories.index")}}' class="text-decoration-none ">Book Category</a></li>
-                        <li class="list-group-item"> <a href='{{route("bookcategories.create")}}' class="text-decoration-none ">
-                        Book Category Add
-                        </a></li>
-                    </ul>
-                </div>
-                <div class="col-lg-9">
-                    @yield('content')
-                </div>
-            </div>
+            @yield('content')
         </div>
 
 
