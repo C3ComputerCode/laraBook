@@ -19,7 +19,7 @@ class BookController extends Controller
     // }
 
     public function customer(){
-        $books = Book::all();
+        $books = Book::latest()->paginate(5);
         return view('welcome',compact('books'));
     }
 

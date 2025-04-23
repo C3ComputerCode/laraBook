@@ -154,6 +154,9 @@ DatabaseSeeder-> \App\Models\BookCategory::factory(5)->create();
 php artisan migrate:fresh --seed
 
 
+php artisan storage:link
+
+
 
 
 
