@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();            
             $table->string('book_id');
             $table->string('name');
+            $table->string('description')->nullable();
             $table->string('author');
             $table->integer('total_copies');
             $table->integer('available_copies')->nullable();

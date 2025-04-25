@@ -24,6 +24,13 @@
         </div>
 
         <div class="mb-3">
+            <label for="description" class="form-label">description</label>
+            <textarea name="description" id="description" class="form-control"></textarea>
+            
+        </div>
+
+
+        <div class="mb-3">
             <label for="total_copies" class="form-label">Total_copies</label>
             <input type="text" class="form-control" id="total_copies" name="total_copies">
         </div>

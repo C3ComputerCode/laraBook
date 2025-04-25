@@ -34,6 +34,7 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/', [App\Http\Controllers\BookController::class, 'customer'])->name('customer.home');
+Route::get('/cart/add/{id}', [App\Http\Controllers\BookController::class, 'addToCart'])->name('cart.add');
 
 
 

@@ -18,6 +18,24 @@ class BookController extends Controller
     //     return $search;
     // }
 
+    public function addToCart($id){
+        $book = Book::findOrFail($id);
+        if (!$book) {
+            return redirect()->route('customer.home')->with('error', 'Product not found!');
+        }
+
+        // Add product to cart
+        $cart = session()->get('cart', []);
+        $cart[$id] = [
+            'name' => $book->name,
+        
+        ];
+        session()->put('cart', $cart);
+        return "add to car " . $id;
+        // return $book_id;
+    }
+
+
     public function customer(){
         $books = Book::latest()->paginate(5);
         return view('welcome',compact('books'));
@@ -83,6 +101,7 @@ class BookController extends Controller
         $book->book_id =  $request->book_id;
         $book->name = $request->name;
         $book->author= $request->author;
+        $book->description= $request->description;
         $book->total_copies= $request->total_copies;
         $book->book_category_id= $request->book_category_id;
         $book->publication_date= $request->publication_date;
@@ -132,6 +151,7 @@ class BookController extends Controller
         $book->book_id =  $request->book_id;
         $book->name = $request->name;
         $book->author= $request->author;
+        $book->description= $request->description;
         $book->total_copies= $request->total_copies;
         $book->book_category_id= $request->book_category_id;
         $book->publication_date= $request->publication_date;
