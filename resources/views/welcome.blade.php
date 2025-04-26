@@ -46,14 +46,19 @@
   </div>
   <div class="offcanvas-body">
   @if(session('cart'))
-    
-  <!-- foreach(session('cart') as $sess){
 
-    }  --> 
+  
+
+    <ul>
+    @foreach(session()->get('cart') as $item)
+      <li>{{$item['name'] }} - {{ $item['book_id']}}</li>
+    @endforeach
+   
+    </ul>
     
 
      
-   <p>alfal</p>
+   <p>Book Order</p>
         
     
   @endif

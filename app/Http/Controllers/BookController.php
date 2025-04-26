@@ -19,6 +19,7 @@ class BookController extends Controller
     // }
 
     public function addToCart($id){
+        // session()->forget('cart');
         $book = Book::findOrFail($id);
         if (!$book) {
             return redirect()->route('customer.home')->with('error', 'Product not found!');
@@ -27,12 +28,21 @@ class BookController extends Controller
         // Add product to cart
         $cart = session()->get('cart', []);
         $cart[$id] = [
+            // 'user_id'=> 
+            'book_id'=> $book->id,
             'name' => $book->name,
+            'borrowing_date'=> now(),
+
         
         ];
         session()->put('cart', $cart);
-        return "add to car " . $id;
-        // return $book_id;
+        return redirect()->back()->with('info','Cart into book is add');;
+    }
+
+    public function deletCart(){
+        session()->forget('cart');
+        return redirect()->back()->with('info','Cart is deleted');;
+
     }
 
 
