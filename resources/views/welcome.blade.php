@@ -47,18 +47,36 @@
   <div class="offcanvas-body">
   @if(session('cart'))
 
-  
+  <form action='{{route("order.store")}}' method="POST" enctype="multipart/form-data">
+        @csrf  
+        <div class="mb-3">
+        <label for="bookid" class="form-label">Book Name</label>
+        @foreach(session()->get('cart') as $item)
+              
+            <div class="d-flex">
+              <input type="text" class="form-control" id="bookid" value="{{ $item['name']}}" disabled>
+              <input type="hidden" class="form-control" id="bookid" name="book_id" value="{{ $item['book_id']}}">
+              <a href="" class="btn btn-danger">del</a>
+            </div>
+       
+        @endforeach   
+        </div>    
+                        
+        
 
-    <ul>
-    @foreach(session()->get('cart') as $item)
+    
+    <input type="hidden" class="form-control" id="user_id" name="user_id">
+    <input type="submit" value="Book Order" class="btn btn-primary">
+</form>
+    <!-- @foreach(session()->get('cart') as $item)
       <li>{{$item['name'] }} - {{ $item['book_id']}}</li>
-    @endforeach
+    @endforeach -->
    
-    </ul>
+  
     
 
      
-   <p>Book Order</p>
+   
         
     
   @endif

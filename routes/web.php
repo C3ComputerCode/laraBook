@@ -2,7 +2,9 @@
 
 use App\Http\Controllers\BookCategoryController;
 use App\Http\Controllers\BookController;
+use App\Http\Controllers\OrderController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,7 +36,12 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/', [App\Http\Controllers\BookController::class, 'customer'])->name('customer.home');
+
 Route::get('/cart/add/{id}', [App\Http\Controllers\BookController::class, 'addToCart'])->name('cart.add');
+Route::get('/cart/deleteCart', [App\Http\Controllers\BookController::class, 'deletCart'])->name('cart.delete');
+
+
+Route::resource('order',OrderController::class)->middleware('auth');;
 
 
 

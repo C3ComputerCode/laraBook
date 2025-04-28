@@ -7,6 +7,7 @@ use App\Models\Photo;
 use App\Models\BookCategory;
 use App\Http\Requests\StoreBookRequest;
 use App\Http\Requests\UpdateBookRequest;
+use Illuminate\Support\Facades\Auth;
 
 class BookController extends Controller
 {
@@ -17,6 +18,7 @@ class BookController extends Controller
     //     $search = $request->input('search');
     //     return $search;
     // }
+    
 
     public function addToCart($id){
         // session()->forget('cart');
@@ -28,7 +30,7 @@ class BookController extends Controller
         // Add product to cart
         $cart = session()->get('cart', []);
         $cart[$id] = [
-            // 'user_id'=> 
+            
             'book_id'=> $book->id,
             'name' => $book->name,
             'borrowing_date'=> now(),
