@@ -16,7 +16,7 @@ return new class extends Migration
             $table->integer('book_id');
             $table->integer('user_id');
             $table->date('order_date');
-            $table->enum('status',['Pending','completed','Cancelled']);
+            $table->enum('status',['Pending','completed','Cancelled'])->default('Pending');
             $table->timestamps();
         });
     }

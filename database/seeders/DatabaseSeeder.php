@@ -26,6 +26,21 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
 
+            \App\Models\User::factory()->create([
+            'name' => 'test',
+            'email' => 'test@gmail.com',
+        ]);
+
+            \App\Models\User::factory()->create([
+            'name' => 'admin',
+            'email' => 'admin@gmail.com',
+        ]);
+
+        \App\Models\User::factory()->create([
+            'name' => 'test2',
+            'email' => 'test2@gmail.com',
+        ]);
+
         \App\Models\BookCategory::factory()->create([
             'name' => "လုံးချင်း",            
         ]);

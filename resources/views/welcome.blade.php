@@ -55,7 +55,7 @@
               
             <div class="d-flex">
               <input type="text" class="form-control" id="bookid" value="{{ $item['name']}}" disabled>
-              <input type="hidden" class="form-control" id="bookid" name="book_id" value="{{ $item['book_id']}}">
+              <input type="hidden" class="form-control" id="bookid" name="book_ids[]" value="{{ $item['book_id']}}">
               <a href="" class="btn btn-danger">del</a>
             </div>
        

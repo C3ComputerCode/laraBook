@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\order;
 use App\Http\Requests\StoreorderRequest;
 use App\Http\Requests\UpdateorderRequest;
+use Illuminate\Support\Facades\Auth;
+
 
 class OrderController extends Controller
 {
@@ -13,7 +15,17 @@ class OrderController extends Controller
      */
     public function index()
     {
-        //
+        if(isset(request()->search)){
+            $search = request()->search;
+            // dd($search);
+            $orders = Order::where('name', 'like', "%$search%")
+            ->orWhere('author','like',"%$search%")
+            ->latest()->paginate(5)->appends(['search' => $search]);
+        }else{
+            $orders = Order::latest()->paginate(5);
+
+        }
+        return view('order.index',compact('orders'));
     }
 
     /**
@@ -30,7 +42,16 @@ class OrderController extends Controller
      */
     public function store(StoreorderRequest $request)
     {   
-        return $request;
+
+        foreach($request->book_ids as $orderItem){
+            $order = new Order();
+            $order->book_id =  $orderItem;                    
+            $order->user_id =  Auth::id();
+            $order->order_date =  now();
+            $order->save();
+        }
+        session()->forget('cart');
+        return redirect()->route("customer.home");
     }
 
     /**

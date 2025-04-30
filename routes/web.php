@@ -24,6 +24,8 @@ use Illuminate\Support\Facades\Auth;
 Route::prefix('admin')->group(function () {
     Route::resource('books',BookController::class);
     Route::resource('bookcategories',BookCategoryController::class);
+    Route::resource('order',OrderController::class)->middleware('auth');    
+
 
 });
 
@@ -41,7 +43,6 @@ Route::get('/cart/add/{id}', [App\Http\Controllers\BookController::class, 'addTo
 Route::get('/cart/deleteCart', [App\Http\Controllers\BookController::class, 'deletCart'])->name('cart.delete');
 
 
-Route::resource('order',OrderController::class)->middleware('auth');;
 
 
 

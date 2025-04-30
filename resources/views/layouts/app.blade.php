@@ -89,7 +89,15 @@
                         <li class="list-group-item"> <a href='{{route("bookcategories.create")}}' class="text-decoration-none ">
                         Book Category Add
                         </a></li>
+                        <li class="list-group-item"> <a href='{{route("order.index")}}' class="text-decoration-none ">
+                        Order List
+                        </a></li>
+                        <li class="list-group-item"> <a href='{{}}' class="text-decoration-none ">
+                        Borrow List
+                        </a></li>
                     </ul>
+
+
                 </div>
                 <div class="col-lg-9">
                     @yield('content')
